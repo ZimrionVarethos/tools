@@ -293,7 +293,7 @@ class PCAPPortPayloadAnalyzer:
                     self.seen_flags.add(f)
                     self.discovered_flags.append({
                         "flag": f,
-                        "vector": f"Per-Packet Stream (Port {port}/{proto}: {src_ip} ➔ {dst_ip})",
+                        "vector": f"Per-Packet Stream (Port {port}/{proto}: {src_ip} -> {dst_ip})",
                         "packet_count": len(pkts)
                     })
 
@@ -325,11 +325,11 @@ class PCAPPortPayloadAnalyzer:
 
 def print_port_flags_table(flags: List[Dict[str, Any]]):
     if not flags:
-        console.print("[yellow]ℹ️ No CTF flags found across port sequences or covert channels.[/yellow]")
+        console.print("[yellow][i] No CTF flags found across port sequences or covert channels.[/yellow]")
         return
 
     table = Table(
-        title=f"🚩 Discovered Covert Channel Flags ({len(flags)} Flags Found)",
+        title=f"[+] Discovered Covert Channel Flags ({len(flags)} Flags Found)",
         show_header=True,
         header_style="bold magenta",
         border_style="bold green",
@@ -352,7 +352,7 @@ def print_port_flags_table(flags: List[Dict[str, Any]]):
 
 def print_covert_channels_summary(covert_port: Dict[str, Any], covert_header: Dict[str, Any]):
     table = Table(
-        title="🕵️ Header & Port Covert Channel Decodings",
+        title="[+] Header & Port Covert Channel Decodings",
         show_header=True,
         header_style="bold yellow",
         border_style="yellow",
@@ -398,11 +398,11 @@ def print_covert_channels_summary(covert_port: Dict[str, Any], covert_header: Di
 
 def print_port_payloads_table(port_payloads: List[Dict[str, Any]], limit: int = 30):
     if not port_payloads:
-        console.print("[yellow]ℹ️ No discrete packet payloads found.[/yellow]")
+        console.print("[yellow][i] No discrete packet payloads found.[/yellow]")
         return
 
     table = Table(
-        title=f"📦 Per-Port Discrete Packet Payload Reassembly ({len(port_payloads)} Port Conversations)",
+        title=f"[+] Per-Port Discrete Packet Payload Reassembly ({len(port_payloads)} Port Conversations)",
         show_header=True,
         header_style="bold magenta",
         border_style="cyan",
@@ -413,7 +413,7 @@ def print_port_payloads_table(port_payloads: List[Dict[str, Any]], limit: int = 
     table.add_column("Proto", style="bold green", width=8, justify="center")
     table.add_column("Packets", style="white", width=9, justify="right")
     table.add_column("Bytes", style="white", width=10, justify="right")
-    table.add_column("Source ➔ Destination", style="cyan", width=28)
+    table.add_column("Source -> Destination", style="cyan", width=28)
     table.add_column("Reassembled Data Preview (First 80 chars)", style="white", min_width=32, overflow="fold")
 
     for idx, p in enumerate(port_payloads[:limit], start=1):
@@ -424,7 +424,7 @@ def print_port_payloads_table(port_payloads: List[Dict[str, Any]], limit: int = 
             p["protocol"],
             f"{p['packet_count']:,}",
             human_size(p["total_bytes"]),
-            f"{p['src_ip']} ➔ {p['dst_ip']}",
+            f"{p['src_ip']} -> {p['dst_ip']}",
             escape(p["preview"])
         )
 
@@ -446,23 +446,23 @@ def export_port_markdown(results: Dict[str, Any], output_path: str, pcap_file: s
         f"- **Source PCAP:** `{os.path.basename(pcap_file)}`",
         f"- **Flags Recovered:** `{len(flags)}`",
         "",
-        "## 🚩 Captured Flags",
+        "## Captured Flags",
         "| # | Captured Flag | Extraction Vector |",
         "|---|---|---|"
     ]
     for idx, f in enumerate(flags, start=1):
         lines.append(f"| {idx} | **`{f['flag'].replace('|', '\\|')}`** | `{f['vector'].replace('|', '\\|')}` |")
 
-    lines.append("\n## 📦 Per-Port Reassembled Payloads")
-    lines.append("| # | Port | Proto | Packets | Bytes | Source ➔ Destination | Preview |")
+    lines.append("\n## Per-Port Reassembled Payloads")
+    lines.append("| # | Port | Proto | Packets | Bytes | Source -> Destination | Preview |")
     lines.append("|---|---|---|---|---|---|---|")
     for idx, p in enumerate(port_payloads[:100], start=1):
         prev_esc = p["preview"].replace("|", "\\|")
-        lines.append(f"| {idx} | `{p['port']}` | **{p['protocol']}** | {p['packet_count']} | {human_size(p['total_bytes'])} | `{p['src_ip']} ➔ {p['dst_ip']}` | `{prev_esc}` |")
+        lines.append(f"| {idx} | `{p['port']}` | **{p['protocol']}** | {p['packet_count']} | {human_size(p['total_bytes'])} | `{p['src_ip']} -> {p['dst_ip']}` | `{prev_esc}` |")
 
     with open(output_path, "w", encoding="utf-8") as fp:
         fp.write("\n".join(lines) + "\n")
-    console.print(f"[bold green]✓[/bold green] Exported Port Payload report to Markdown: [cyan]{output_path}[/cyan]")
+    console.print(f"[bold green][+][/bold green] Exported Port Payload report to Markdown: [cyan]{output_path}[/cyan]")
 
 
 def export_port_json(results: Dict[str, Any], output_path: str):
@@ -479,13 +479,13 @@ def export_port_json(results: Dict[str, Any], output_path: str):
             "port_payloads": clean_payloads
         }
         json.dump(clean_results, fp, indent=2, ensure_ascii=False)
-    console.print(f"[bold green]✓[/bold green] Exported Port Payload report to JSON: [cyan]{output_path}[/cyan]")
+    console.print(f"[bold green][+][/bold green] Exported Port Payload report to JSON: [cyan]{output_path}[/cyan]")
 
 
 def main(args_list=None):
     parser = argparse.ArgumentParser(
         prog="pcapportpayload",
-        description="🔌 Port Manipulation & Per-Packet Discrete Payload Analyzer (Port-to-ASCII, IP.ID, TTL & Line Reassembly)",
+        description="Port Manipulation & Per-Packet Discrete Payload Analyzer (Port-to-ASCII, IP.ID, TTL & Line Reassembly)",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:

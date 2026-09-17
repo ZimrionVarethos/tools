@@ -314,7 +314,7 @@ struct CarveCandidate {
 
 fn print_banner() {
     println!("{}", "================================================================================".cyan());
-    println!("{}", "   🔬 MEMCARVE - Universal Raw Memory Carver & Heuristic Multi-Page Assembler   ".bold().bright_green());
+    println!("{}", "   MEMCARVE - Universal Raw Memory Carver & Heuristic Multi-Page Assembler   ".bold().bright_green());
     println!("{}", "   DFIR Unified Suite | SIMD Header Dictionary | LIFO Reverse-Page Detection   ".bright_yellow());
     println!("{}", "================================================================================".cyan());
 }
@@ -881,7 +881,7 @@ fn execute_carve_action(candidates: &[CarveCandidate], extract_dir: Option<&str>
         };
 
         let status_cell = if cand.is_valid {
-            Cell::new(format!("✓ VALID ({})", cand.checksum_info)).fg(Color::Green)
+            Cell::new(format!("[+] VALID ({})", cand.checksum_info)).fg(Color::Green)
         } else {
             Cell::new(format!("? UNVERIFIED ({})", cand.checksum_info)).fg(Color::Yellow)
         };
@@ -944,7 +944,7 @@ fn execute_carve_action(candidates: &[CarveCandidate], extract_dir: Option<&str>
 
                         println!(
                             "  {} Saved: {} ({}) | SHA256: {}",
-                            "✓".bold().green(),
+                            "[+]".bold().green(),
                             out_path.display().to_string().bold().bright_white(),
                             format!("{} bytes", cand.file_size).cyan(),
                             sha256_hex.bright_black()
@@ -997,7 +997,7 @@ fn search_binaries_with_string(
     let elapsed = start_time.elapsed();
     println!(
         "{} Found {} string occurrences of '{}' across RAM in {:.3} seconds.",
-        "[✓]".bold().green(),
+        "[+]".bold().green(),
         needle_matches.len().to_string().bold().yellow(),
         needle.cyan(),
         elapsed.as_secs_f64()
@@ -1077,7 +1077,7 @@ fn search_binaries_with_string(
                     if contains_needle {
                         println!(
                             "  {} MATCH: [{}] Header at {} contains '{}' ({}, Size: {} B)",
-                            "✓".bold().bright_green(),
+                            "[+]".bold().bright_green(),
                             format.id.bold().cyan(),
                             format!("0x{:08x}", abs_header_pos).bold().green(),
                             needle.bold().yellow(),

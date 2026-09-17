@@ -648,35 +648,35 @@ def render_executive_summary(categorized_streams: Dict[str, Set[str]]):
 
     msg = []
     if has_suspicious:
-        msg.append("[bold red]🚨 HASIL DETEKSI ENDPOINT MENCURIGAKAN DITEMUKAN:[/bold red]\n")
+        msg.append("[bold red][!] HASIL DETEKSI ENDPOINT MENCURIGAKAN DITEMUKAN:[/bold red]\n")
         if c2_streams:
             st_fmt = ", ".join(f"#{s}" for s in c2_streams)
-            msg.append(f" • [bold red]🎯 C2 Endpoints & Beacons[/bold red]      : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
+            msg.append(f" • [bold red][*] C2 Endpoints & Beacons[/bold red]      : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
         if secret_streams:
             st_fmt = ", ".join(f"#{s}" for s in secret_streams)
-            msg.append(f" • [bold yellow]🔑 Secrets & Cryptographic Seeds[/bold yellow]: Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
+            msg.append(f" • [bold yellow][*] Secrets & Cryptographic Seeds[/bold yellow]: Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
         if exfil_streams:
             st_fmt = ", ".join(f"#{s}" for s in exfil_streams)
-            msg.append(f" • [bold magenta]📦 Data Exfiltration (Payloads)[/bold magenta] : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
+            msg.append(f" • [bold magenta][*] Data Exfiltration (Payloads)[/bold magenta] : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
         if fake_tele_streams:
             st_fmt = ", ".join(f"#{s}" for s in fake_tele_streams)
-            msg.append(f" • [bold red on yellow]🎭 Fake Telemetry Mimic (Spoofed)[/bold red on yellow] : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
+            msg.append(f" • [bold red on yellow][*] Fake Telemetry Mimic (Spoofed)[/bold red on yellow] : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
         if flag_streams:
             st_fmt = ", ".join(f"#{s}" for s in flag_streams)
-            msg.append(f" • [bold bright_white on red]🚩 CTF Flags Discovered[/bold bright_white on red]         : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
+            msg.append(f" • [bold bright_white on red][*] CTF Flags Discovered[/bold bright_white on red]         : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
         else:
-            msg.append(f" • [dim]🚩 CTF Flags[/dim]                    : [dim]Tidak ada format flag teks biasa[/dim]")
+            msg.append(f" • [dim][*] CTF Flags[/dim]                    : [dim]Tidak ada format flag teks biasa[/dim]")
         if entropy_streams:
             st_fmt = ", ".join(f"#{s}" for s in entropy_streams)
-            msg.append(f" • [bold bright_cyan]🎲 High Entropy / Encoded Path[/bold bright_cyan]  : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
+            msg.append(f" • [bold bright_cyan][*] High Entropy / Encoded Path[/bold bright_cyan]  : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
         if ip_streams:
             st_fmt = ", ".join(f"#{s}" for s in ip_streams)
-            msg.append(f" • [bold cyan]⚠️  Raw IP Host & Non-Std Ports[/bold cyan] : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
+            msg.append(f" • [bold cyan][!] Raw IP Host & Non-Std Ports[/bold cyan] : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
         if sens_streams:
             st_fmt = ", ".join(f"#{s}" for s in sens_streams)
-            msg.append(f" • [bold orange3]🛡️  Sensitive / Admin Endpoints[/bold orange3] : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
+            msg.append(f" • [bold orange3][*] Sensitive / Admin Endpoints[/bold orange3] : Ditemukan pada stream [bold yellow]{st_fmt}[/bold yellow]")
     else:
-        msg.append("[bold green] Tidak ditemukan endpoint mencurigakan atau C2. Seluruh lalu lintas tergolong telemetri / web standar.[/bold green]")
+        msg.append("[bold green][+] Tidak ditemukan endpoint mencurigakan atau C2. Seluruh lalu lintas tergolong telemetri / web standar.[/bold green]")
 
     border_color = "bold red" if (c2_streams or secret_streams or exfil_streams or flag_streams or fake_tele_streams) else "dim green"
     console.print(Panel("\n".join(msg), title="[bold]RINGKASAN TEMUAN FORENSIK[/bold]", border_style=border_color, expand=True))

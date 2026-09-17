@@ -376,7 +376,7 @@ def print_dmp_help():
   <shorthand_command> <memory.dmp/.raw> [options]
 
 [bold cyan]Available Memory Commands:[/bold cyan]
-  [green]memcarve[/green]   Universal Raw Memory Carver (Rust ⚡) for DEX, ELF, PE, ZIP with LIFO reverse page detection
+  [green]memcarve[/green]   Universal Raw Memory Carver (Rust) for DEX, ELF, PE, ZIP with LIFO reverse page detection
   [green]volrust[/green]    High-performance Volatility 3 port in Rust (vol-rs) - 20x to 500x faster
   [green]scan[/green]       Full automated Windows memory triage (PEB info, loaded modules, CTF flag hunter)
   [green]peb[/green]        Process Environment Block (!peb): cmdline, env vars, working directory
@@ -630,14 +630,14 @@ def print_global_help():
 
 [bold cyan]Shorthand Direct Commands by Category:[/bold cyan]
 
-[bold bright_magenta]⚡ Universal & Rust High-Performance Suite:[/bold bright_magenta]
+[bold bright_magenta]Universal & Rust High-Performance Suite:[/bold bright_magenta]
   [green]globalscan2 <file>[/green]            Port Rust super cepat: scan flags, hashes, metadata & XOR brute-force
   [green]strings2 <file> -s <str>[/green]       Carving string ASCII/UTF-16LE ultra-cepat dengan regex & context lines
   [green]binwalk2 <file> -e -o <dir>[/green]   Zero-copy SIMD firmware & binary signature carver
   [green]memcarve scan <raw> DEX <q>[/green]   Universal memory carver dengan LIFO reverse-page allocation assembler
   [green]volrust -f <raw> <plugin>[/green]     Porting resmi Volatility 3 berbasis Rust (20x s/d 500x lebih cepat)
 
-[bold bright_magenta]🌐 PCAP Network Forensics & C2 Hunter (pcap/):[/bold bright_magenta]
+[bold bright_magenta]PCAP Network Forensics & C2 Hunter (pcap/):[/bold bright_magenta]
   [green]pcapendpoint <file.pcap>[/green]        Scan otomatis seluruh stream untuk C2, Flag, Seed, Exfil & Telemetri Palsu
   [green]pcapendpoint <file.pcap> -s <ID>[/green] Follow percakapan request-response dua arah pada stream tertentu
   [green]pcapfirst <file.pcap>[/green]           Macro triage dashboard: metadata, hierarki protokol, port & top talkers
@@ -650,7 +650,7 @@ def print_global_help():
   [green]pcappayload <file.pcap> --icmp[/green]  Rekonstruksi data urutan ping ICMP exfiltration
   [green]pcapportpayload <file.pcap>[/green]     Covert channel decoder via manipulasi port / IP.ID / TTL
 
-[bold bright_magenta]🧠 Memory Forensics (Windows, Linux, Android) (dmp/, lime/):[/bold bright_magenta]
+[bold bright_magenta]Memory Forensics (Windows, Linux, Android) (dmp/, lime/):[/bold bright_magenta]
   [green]dmpscan <memory.dmp>[/green]            Triage otomatis memori Windows: PEB, modul ter-load & flag hunter
   [green]dmpdump <memory.dmp> --main[/green]    Carve & dump main executable atau blok memori via base address
   [green]dmppeb <memory.dmp>[/green]             Ekstraksi PEB (Command line, environment variables, working dir)
@@ -660,7 +660,7 @@ def print_global_help():
   [green]limebuild <memory.lime>[/green]         Download & compile otomatis matching symbol tables Volatility 3
   [green]limefast <memory.lime>[/green]          Triage instan memori Linux tanpa simbol (.json & tabel proses)
 
-[bold bright_magenta]🛠️ Assembly & Reverse Engineering Suite (assembly/):[/bold bright_magenta]
+[bold bright_magenta]Assembly & Reverse Engineering Suite (assembly/):[/bold bright_magenta]
   [green]ghidraanalyze current[/green]          Jembatan live interaktif ke Ghidra GUI Windows (decompile di cursor)
   [green]exefix <dumped.exe> -o <out>[/green]  Realign section header PE dump memori untuk decompilasi Ghidra bersih
   [green]exedoctor <file.exe>[/green]           Diagnosa PE header integrity, sections, dan checksum
@@ -668,19 +668,19 @@ def print_global_help():
   [green]elfdoctor <binary.elf>[/green]         Diagnosa biner Linux ELF: header, 32/64-bit, stripped symbols, UPX
   [green]disasm <payload.bin> -a x64[/green]   Multi-arch raw shellcode disassembler dengan deteksi PEB / API
 
-[bold bright_magenta]🔐 Cryptography & Obfuscation Analysis (cipher/):[/bold bright_magenta]
+[bold bright_magenta]Cryptography & Obfuscation Analysis (cipher/):[/bold bright_magenta]
   [green]ciphercheck[/green]                    Interactive mode: identifikasi jenis cipher, encoding, dan entropy
   [green]ciphercheck -t "<string>"[/green]      Inspeksi cepat string ciphertext langsung di terminal
   [green]cryptohunt <file>[/green]              Auto-harvest Key 32B/16B, Nonce, dan konstanta kriptografi
   [green]python3 .../cipher/T_*.py[/green]      Template script siap pakai (AES, ChaCha20, RC4, RSA, XOR, Classical)
 
-[bold bright_magenta]🖼️ Steganography & Artifact Triage (stego/):[/bold bright_magenta]
+[bold bright_magenta]Steganography & Artifact Triage (stego/):[/bold bright_magenta]
   [green]stegoscan <image.png>[/green]           Diagnosa chunk kustom PNG, fix height IHDR & carve trailing overlay
   [green]stegodiff <img1> <img2>[/green]         Auto-bruteforce shift 2D (dx, dy) & decode residual arithmetic delta
   [green]stegocrack <secret.jpg>[/green]        Automated Steghide & OutGuess cracker (blank & wordlist)
   [green]stegoaudio <sound.wav>[/green]         Visualisasi spektrogram FFT resolusi tinggi & WAV LSB extractor
 
-[bold bright_magenta]📂 AccessData AD1 Forensics (ad1/):[/bold bright_magenta]
+[bold bright_magenta]AccessData AD1 Forensics (ad1/):[/bold bright_magenta]
   [green]ad1history <file.ad1>[/green]          Ekstraksi database browser (Chrome, Edge, Firefox, Brave) + DPAPI bundle
   [green]ad1dpapi <file.ad1> -p <pwd>[/green]   Dekripsi offline password Chromium via DPAPI MasterKey
   [green]ad1amcache <file.ad1>[/green]          Analisis artefak eksekusi program Amcache.hve

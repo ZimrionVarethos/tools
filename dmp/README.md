@@ -21,7 +21,7 @@ Suite alat analisis memori proses dan *crash dump* Windows (**`.dmp`**, **`.raw`
 
 | Nama Tool / Alias | Target Artefak | Deskripsi & Informasi yang Diekstrak |
 | :--- | :--- | :--- |
-| **`memcarve`** (Rust ⚡) | `memory.raw`, `.dmp`, `.bin` | **Universal Raw Memory Carver & Reverse-Page Assembler**: Ekstraksi biner cepat (DEX, ELF, PE, ZIP) dari raw RAM gigabyte dalam hitungan detik. Menggunakan heuristik deteksi alokasi LIFO *reverse page order* vs *forward linear* untuk merekonstruksi biner utuh tanpa korupsi byte, verifikasi checksum (Adler32, SHA-1, ELF headers), dan preview context halaman memori. |
+| **`memcarve`** (Rust) | `memory.raw`, `.dmp`, `.bin` | **Universal Raw Memory Carver & Reverse-Page Assembler**: Ekstraksi biner cepat (DEX, ELF, PE, ZIP) dari raw RAM gigabyte dalam hitungan detik. Menggunakan heuristik deteksi alokasi LIFO *reverse page order* vs *forward linear* untuk merekonstruksi biner utuh tanpa korupsi byte, verifikasi checksum (Adler32, SHA-1, ELF headers), dan preview context halaman memori. |
 | **`volrust`** (`vol-rs`) | `memory.raw`, `.dmp` | **Volatility 3 Engine Berbasis Rust**: Eksekusi plugin memory analysis (`pslist`, `malfind`, `netscan`, `filescan`) 20x s/d 500x lebih cepat tanpa ketergantungan interpreter Python. |
 | **`dmpscan`** | `memory.dmp`, `crash.dmp` | **Full Automated Memory Triage**: Menjalankan analisis menyeluruh dalam satu perintah: ringkasan proses (PID, Nama, Arsitektur, Waktu), variabel lingkungan (PEB), daftar modul yang dimuat (`lm`), dan pemindaian flag CTF tanpa noise. Memberikan petunjuk alamat base address untuk dumping. |
 | **`dmpdump`** | Target Memory / Module | **Targeted Memory & Module Dumper**: Mengekstrak biner executable (`.exe`), pustaka (`.dll`), atau rentang alamat memori virtual tertentu langsung ke disk berdasarkan **Base Address** (`-i`), **Nama Modul** (`-m`), atau otomatis **Main Executable** (`--main`). Dilengkapi kalkulasi hash MD5 dan SHA-256. |
@@ -168,7 +168,7 @@ dmpscan DbgInfo.DMP --flags-only -p "CTF{"
 
 ---
 
-### F. `memcarve` – Universal Raw Memory Carver & Reverse-Page Assembler (Rust ⚡)
+### F. `memcarve` – Universal Raw Memory Carver & Reverse-Page Assembler (Rust)
 
 Carver memori raw berkinerja tinggi berbasis Rust yang dirancang khusus untuk membedah raw memory dump (Linux, Android, Windows) dengan auto-deteksi alokasi halaman LIFO *reverse order* vs *forward linear*.
 
@@ -202,7 +202,7 @@ memcarve context chall.raw --offset 0x00a12000
 
 ---
 
-### G. `volrust` – High-Performance Volatility 3 Engine in Rust ⚡
+### G. `volrust` – High-Performance Volatility 3 Engine in Rust
 
 Porting resmi engine Volatility 3 berbasis Rust (`vol-rs`) yang mengeksekusi plugin analisis memori 20x hingga 500x lebih cepat dibanding Python runtime tradisional.
 

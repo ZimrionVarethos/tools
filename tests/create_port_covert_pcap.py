@@ -82,7 +82,7 @@ def create_pcap(filename: str):
         write_packet(build_ipv4_tcp_pkt("192.168.1.100", 55555, "10.0.0.50", 80, 5000 + idx * 10, 1, 0x02, b"", ip_id=ord(ch)), 3.0 + idx * 0.05)
 
     f.close()
-    print(f"[✓] Generated covert test PCAP: {filename} ({os.path.getsize(filename)} bytes)")
+    print(f"[+] Generated covert test PCAP: {filename} ({os.path.getsize(filename)} bytes)")
 
 if __name__ == "__main__":
     out_path = os.path.join(os.path.dirname(__file__), "covert_traffic.pcap")
