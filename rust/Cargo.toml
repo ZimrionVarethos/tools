@@ -1,0 +1,8 @@
+[workspace]
+members = [
+    "crates/globalscan2",
+    "crates/strings2",
+    "crates/binwalk2",
+    "crates/memcarve",
+]
+resolver = "2"

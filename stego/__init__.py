@@ -1,0 +1,3 @@
+"""
+Master Steganography Suite (stego)
+"""

@@ -1,0 +1,14 @@
+[package]
+name = "strings2"
+version = "0.1.0"
+edition = "2021"
+authors = ["DFIR Toolkit Team"]
+description = "Ultra-Fast Universal Forensic Strings Carving & Search Engine"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+memmap2 = "0.9"
+rayon = "1.10"
+regex = "1.10"
+colored = "2.1"
+memchr = "2.7"
